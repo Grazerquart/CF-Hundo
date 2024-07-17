@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>APP NAME Coding Challenge by Morote</title>
+    <title>Hundo Coding Challenge by Morote</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,7 +36,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/index.html"><img class="nav-logo"
-                        src="/img/Morote_white_underline.svg">APPNAME</a>
+                        src="/img/Morote_white_underline.svg">Hundo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                             <a class="nav-link active" aria-current="page" href="/code.html">Code</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Repo</a>
+                            <a class="nav-link" href="https://github.com/Grazerquart/CF-Hundo">Repo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://smorote.com">About</a>
@@ -71,17 +71,65 @@
                 <div class="col-12 col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-function getValues(){
-    let messageInput = document.getElementById("message").value;
-    let alertMessage = document.getElementById("alertMessage");
-    alertMessage.innerText = messageInput;
+function getValues() {
+    // Take user inputs and set them to variables for later use
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+    // Convert user inputs to an interger
+    startValue = parseInt(startValue);
+    endValue = parseInt(endValue);
+    // Check if the user input are valid numbers
+    if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+        // If user input is valid generate numbers then display them
+        let numbers = generateNumbers(startValue, endValue);
+        displayNumbers(numbers);
+    } else {
+        // If user input isn't valid ask for proper input
+        alert("You must enter a number.");
+    }
+}
+function generateNumbers(start, end) {
+    // Build an array of the numbers
+    let numbers = [];
+    for(i = start; i <= end; i++){
+        // Loop through counting from the start
+        // value to the end value adding each one to the array
+        numbers.push(i);
+    }
+    // Give the array of numbers back to the calling function
+    return numbers;
+}
+function displayNumbers(numbers) {
+    // Build out the HTML to be displayed
+    let templateCols = "";
+    for(let i=0; i < numbers.length; i++) {
+        // Loop over the array
+        let classname = "";
+        if(numbers[i] % 2 == 0) {
+            // If the number is even then add the even class 
+            let classname = "even";
+            // Add the new chunk to the current HTML
+            templateCols += `&lt;div class="col ${classname}"&gt;${numbers[i]},&lt;/div&gt;`;
+        } else {
+            // If the number is odd then add the odd class 
+            let classname = "odd";
+            // Add the new chunk to the current HTML
+            templateCols += `&lt;div class="col ${classname}"&gt;${numbers[i]},&lt;/div&gt;`;
+        }
+    }
+    // Set the HTML element to contain the output
+    document.getElementById("outputData").innerHTML = templateCols;
 }
                         </code>
                     </pre>
                 </div>
                 <div class="col-12 col-lg-4">
                     <h5>getValues</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur atque asperiores doloribus est corrupti dolor rem sint fuga voluptatum, temporibus, expedita aliquam placeat accusamus aperiam! Dolore animi esse cupiditate voluptas?</p>
+                    <p>This function takes the user input, assigns each field to a variable. We convert the user input to intergers, and validate them. Then uses those variables to call the next functions. </p>
+                    <h5>generateNumbers</h5>
+                    <p>Here we use loop to count from the starting value to the end value. Every loop we push the loop number to a new array that we then pass back to the calling function.</p>
+                    <h5>displayNumbers</h5>
+                    <p>In this function we build out the HTML to be shown to the user. We start loop over the array once, wrapping each element in HTML, adding an odd or even class based on the number. Each time we loop over it we add the new Div to the string that we will then display to the user.</p>
                 </div>
             </div>
         </div>
